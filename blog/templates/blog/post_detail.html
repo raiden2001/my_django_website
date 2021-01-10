@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My blog</title>
+</head>
+<body>
+<!---if this published date exisits --->
+
+{% if post.published_date %}
+    <div>  <!--show the publised date if exist -->
+        {{post.published_date}}
+
+    </div>
+{% endif %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.text|linebreaksbr }}</p>
+</body>
+</html>

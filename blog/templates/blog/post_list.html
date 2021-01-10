@@ -7,11 +7,11 @@
 <body>
 <h1><a href="">CP BLOG</a></h1>
 {% for post in posts %}
-
-   <div>
-
+    <div>
+            <!--we have specfic for publish date--->
         <p>Published date: {{post.published_date}}</p>
-        <h1><a href="">{{post.title}}</a></h1>
+       <!---for the link is post_detail.html, arg= pk=post.pk--->
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
         <p>{{ post.text|linebreaksbr }}</p>
    </div>
 {% endfor %}
