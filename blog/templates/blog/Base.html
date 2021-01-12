@@ -1,0 +1,39 @@
+
+<!---this is to insure that incase we need upload media files---->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My blog</title>
+
+     <link href="https://fonts.googleapis.com/css?Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+
+<div class="page-header">
+    <!--goes back to alternative :'/' homepage----->
+    <h1><a href="{% url "post_list" %}">Voting BLOG USA </a></h1>
+</div>
+
+
+<!----its defiend in css .content------>
+<div class="content container">
+    <div class="row">
+         <div class="col-md-8">
+               <!---inhertance to the post_detail-------->
+             {% block content %}
+
+
+             {% endblock %}
+
+
+         </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>my blog</title>
-</head>
-<body>
-<h1><a href="">CP BLOG</a></h1>
-{% for post in posts %}
-    <div>
-            <!--we have specfic for publish date--->
-        <p>Published date: {{post.published_date}}</p>
-       <!---for the link is post_detail.html, arg= pk=post.pk--->
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-   </div>
-{% endfor %}
+ {% extends 'blog/Base.html'%}
 
-</body>
-</html>
+ {% block content%}
+        {% for post in posts %}
+             <div class="post">
+
+                 <div class="date">
+                     <!--we have specfic for publish date--->
+                        <p>Published date: {{post.published_date}}</p>
+                 </div>
+
+               <!---for the link is post_detail.html, arg= pk=post.pk--->
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+{% endblock  %}
