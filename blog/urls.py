@@ -12,5 +12,9 @@ urlpatterns = [
     # mydangosite.com/post/2 === online
 
     #127.0.0.1:8000/post/2 <int:pk> <------taht replaced or passed by 2 = pk replaced ,which has primary key of it indicates in the post
-    path('post/<int:pk>/', views.post_detail, name='post_detail')
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+
+   # 127.0.0.1:8000/post/new ---> local
+    # mydangosite.com/post/new----> online
+    path('post/new', views.post_new, name='post_new')
 ]
