@@ -1,19 +1,26 @@
 
 {% extends 'blog/Base.html' %} <!----heritaning from base.html --->
+ <!----the fontfrom base.html will be shown here---------->
+    {% block content %}
+    <!---if this published date exisits --->
+        <div class="post">
 
-{% block content %}
-<!---if this published date exisits --->
-   <div class="post">
+            {% if post.published_date %}
+                <div class="date">
+          <!--show the publised date if exist -->
+                      {{post.published_date}}
+                </div>
+        {% endif %}
+            <i class="fa fa-truck" aria-hidden="true"></i>
 
-{% if post.published_date %}
-       <div class="date">
-      <!--show the publised date if exist -->
-        {{post.published_date}}
-       </div>
-{% endif %}
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.text|linebreaksbr }}</p>
+            <!---creates a link(href) to SAVE from this new post url into the urls.py get pk------>
+            <a href="{%url 'post_edit' pk=post.pk %}"><i class="fa fa-edit fa-2x" style="color: #339af0"></i></a>
+            <i class="fa fa-twitter" style="color:#000000"></i>
+            <i class="fa fa-circle-o"></i>
 
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+                
     </div>
 
 {% endblock %}

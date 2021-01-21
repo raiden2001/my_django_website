@@ -39,12 +39,12 @@ h1,h2,h3,h4 {
     color: red;
 }
 
-.post-form-blog textarea {
+.post-form-blog textarea{
     width:100%;
 
 }
 
-.post-form-blog .btn-primary {
+.post-form-blog .btn-primary{
     float: right;
 
 }
