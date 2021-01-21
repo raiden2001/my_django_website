@@ -1,6 +1,7 @@
 
 <!---this is to insure that incase we need upload media files---->
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
 
 <title>My blog</title>
 
-     <link href="//fonts.googleapis.com/css?Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans" rel="stylesheet" type="text/css">
 
      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
@@ -25,7 +26,12 @@
 
 <div class="page-header">
     <!--goes back to alternative :'/' homepage----->
-    <h1><a href="{% url "post_list" %}">Voting BLOG USA </a></h1>
+
+    <!-----creates a link to new post------------------>
+    {% if user.is_authenticated %}
+        <a href="{%url 'post_new' %}" class="top-menu"> <i class="fa fa-user-plus fa-2x"  aria-hidden="true" ></i></a>
+    {% endif %}
+    <h1><a href="{% url 'post_list' %}">Voting BLOG USA </a></h1>
 </div>
 
 
