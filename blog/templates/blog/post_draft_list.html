@@ -1,0 +1,16 @@
+{% extends 'blog/Base.html' %}
+
+{% block content %}
+
+<!------------------SENDS  HERE AND TO EDIT.HTML------->
+    {% for post in posts %}
+
+        <div class="post">
+            <!-----piping here between dates ----->
+                <p class="date"> created: {{post.created_date}}</p>
+                <h1><a href="{%url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+                <p>{{ post.text|truncatechars:50 }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

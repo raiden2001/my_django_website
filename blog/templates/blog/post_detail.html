@@ -4,12 +4,15 @@
     {% block content %}
     <!---if this published date exisits --->
         <div class="post">
-
+        <!------if publish date exist show publish date------------------------->
             {% if post.published_date %}
                 <div class="date">
           <!--show the publised date if exist -->
-                      {{post.published_date}}
+                    {{post.published_date}}
                 </div>
+            <!-----------if shows no publish date then show option to hit piublish date -------->
+             {% else %}
+                <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
              {% endif %}
 
 
@@ -24,10 +27,10 @@
             <i class="fa fa-twitter" style="color:#000000"></i>
             <i class="fa fa-circle-o"></i>
 
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text|linebreaksbr }}</p>
                 
-    </div>
+        </div>
 
 {% endblock %}
 
