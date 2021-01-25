@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<title>My blog</title>
+<title>{% block title %}{% endblock %}</title>
 
   <link href="//fonts.googleapis.com/css?Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans" rel="stylesheet" type="text/css">
 
@@ -29,10 +29,14 @@
 
     <!-----creates a link to new post-{%url post_new}or edit}----------------->
     <!----- mapping --should take us into drafts from urls respond to -- --->
+    <!--------if user logins -show draft and new blog post icon--------------->
     {% if user.is_authenticated %}
         <a href="{%url 'post_draft_list' %}" class="top-menu"><i class="fab fa-firstdraft" aria-hidden="true"></i></a>
         <a href="{%url 'post_new' %}" class="top-menu"> <i class="fa fa-user-plus fa-2x"  aria-hidden="true" ></i></a>
+    {% else %}
+        <a href="{%url 'login' %}" class="top-menu"> <i class="fa fa-sign-in-alt fa-2x"></i></a>
     {% endif %}
+
     <h1><a href="{% url 'post_list' %}">Voting BLOG USA </a></h1>
 </div>
 

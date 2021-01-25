@@ -1,7 +1,8 @@
 
 {% extends 'blog/Base.html' %} <!----heritaning from base.html --->
  <!----the fontfrom base.html will be shown here---------->
-    {% block content %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
     <!---if this published date exisits --->
         <div class="post">
         <!------if publish date exist show publish date------------------------->
