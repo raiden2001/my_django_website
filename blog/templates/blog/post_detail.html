@@ -1,0 +1,37 @@
+
+{% extends 'blog/Base.html' %} <!----heritaning from base.html --->
+ <!----the fontfrom base.html will be shown here---------->
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+    <!---if this published date exisits --->
+        <div class="post">
+        <!------if publish date exist show publish date------------------------->
+            {% if post.published_date %}
+                <div class="date">
+          <!--show the publised date if exist -->
+                    {{post.published_date}}
+                </div>
+            <!-----------if shows no publish date then show option to hit piublish date -------->
+             {% else %}
+                <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
+             {% endif %}
+
+
+                <i class="fa fa-truck" aria-hidden="true"></i>
+
+            <!---creates a link(href) to SAVE from this new post url into the urls.py get pk------>
+            <!-----also locks the authentication------------>
+            {% if user.is_authenticated %}
+            <a href="{%url 'post_edit' pk=post.pk %}"><i class="fa fa-edit fa-2x" style="color: #339af0"></i></a>
+            {% endif %}
+
+            <i class="fa fa-twitter" style="color:#000000"></i>
+            <i class="fa fa-circle-o"></i>
+
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+                
+        </div>
+
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends 'blog/Base.html' %}
+{% block title %}{{ post.title }} {% endblock %}
+
+{% block content %}
+
+    <h1>New post </h1>
+    <form method="post" class="post-form-blog">
+        {% csrf_token %}  <!----adds the csrf token error---->
+        {{ form.as_p }} <!----no other ipnut to adjust setting ----->
+         <button type="submit" class="btn btn-primary"> SAVE</button>
+    </form>
+
+{% endblock %}

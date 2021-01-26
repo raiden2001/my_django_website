@@ -1,0 +1,18 @@
+ {% extends 'blog/Base.html'%}
+ {% block title%} My American President Vote pages Blog {% endblock %}
+
+ {% block content%}
+        {% for post in posts %}
+             <div class="post">
+
+                 <div class="date">
+                     <!--we have specfic for publish date--->
+                        <p>Published date: {{post.published_date}}</p>
+                 </div>
+
+               <!---for the link is post_detail.html, arg= pk=post.pk CLICKABLE--->
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+                <p>{{ post.text|truncatechars:10 | linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+{% endblock  %}

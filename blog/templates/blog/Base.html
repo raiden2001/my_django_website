@@ -1,0 +1,62 @@
+
+<!---this is to insure that incase we need upload media files---->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+
+
+</head>
+<body>
+
+<title>{% block title %}{% endblock %}</title>
+
+  <link href="//fonts.googleapis.com/css?Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans" rel="stylesheet" type="text/css">
+
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/v4-shims.css">
+
+
+<div class="page-header">
+    <!--goes back to alternative :'/' homepage----->
+
+    <!-----creates a link to new post-{%url post_new}or edit}----------------->
+    <!----- mapping --should take us into drafts from urls respond to -- --->
+    <!--------if user logins -show draft and new blog post icon--------------->
+    {% if user.is_authenticated %}
+        <a href="{%url 'post_draft_list' %}" class="top-menu"><i class="fab fa-firstdraft" aria-hidden="true"></i></a>
+        <a href="{%url 'post_new' %}" class="top-menu"> <i class="fa fa-user-plus fa-2x"  aria-hidden="true" ></i></a>
+                                    <!--- the user has authietci in aut- and also small suppose make icon small  ------------------------>
+        <p class="top-menu">Hello, {{ user.username }} <small>(<a href="{%url 'logout' %}">Logout</a>)</small></p>
+    {% else %}
+        <a href="{%url 'login' %}" class="top-menu"> <i class="fa fa-sign-in-alt fa-2x"></i></a>
+    {% endif %}
+
+    <h1><a href="{% url 'post_list' %}">Voting BLOG USA </a></h1>
+</div>
+
+
+<!----its defiend in css .content------>
+<div class="content container">
+    <div class="row">
+         <div class="col-md-8">
+               <!---inhertance to the post_detail-------->
+             {% block content %}
+
+
+             {% endblock %}
+
+
+         </div>
+    </div>
+</div>
+
+</body>
+</html>

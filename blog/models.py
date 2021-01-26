@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Post(models.Model):
     # piost nees to do
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -14,8 +15,8 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-# creates a string representation
+    # creates a string representation
     def __str__(self):
         return self.title
-        #return str(self.title) + ' by ' + str(self.author)
-            #u use that if u want more information by the string
+        # return str(self.title) + ' by ' + str(self.author)
+        # u use that if u want more information by the string
