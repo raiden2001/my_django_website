@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post
 
 
@@ -89,3 +89,22 @@ def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()  # this was created in our models
     return redirect('post_detail', pk=pk)
+
+
+# use block post must have primary key get to specific blog post
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user  # obtains the superuse
+            comment.post = post  # gets the post from Post we got previously
+            comment.save()  # saves comment
+            return redirect('post_detail', pk=post.pk) # main page
+            # goes to the post detials  use of the primray key
+    else:
+        form = CommentForm()
+        stuff_for_frontend = {'form': form}
+
+    return render(request, 'blog/add_comment_to_post.html', stuff_for_frontend )
