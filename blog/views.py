@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .forms import PostForm, CommentForm
-from .models import Post
+from .models import Post, Comment
 
 
 # Create your views here.
@@ -75,7 +75,7 @@ def post_edit(request, pk):  # we need the pk for the specific post
 
 
 @login_required
-def post_draft_list(request):
+def post_draft_list(request):  # show just list of stuff here nopk is needed
     # want you to show all of my  draft by decending order
     # send them to the post_draft_list.html for review
     posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
@@ -85,7 +85,7 @@ def post_draft_list(request):
 
 
 @login_required
-def post_publish(request, pk):
+def post_publish(request, pk):  # if you publish soemthing u need pk
     post = get_object_or_404(Post, pk=pk)
     post.publish()  # this was created in our models
     return redirect('post_detail', pk=pk)
@@ -101,10 +101,19 @@ def add_comment_to_post(request, pk):
             comment.author = request.user  # obtains the superuse
             comment.post = post  # gets the post from Post we got previously
             comment.save()  # saves comment
-            return redirect('post_detail', pk=post.pk) # main page
+            return redirect('post_detail', pk=post.pk)  # main page
             # goes to the post detials  use of the primray key
     else:
         form = CommentForm()
         stuff_for_frontend = {'form': form}
 
-    return render(request, 'blog/add_comment_to_post.html', stuff_for_frontend )
+    return render(request, 'blog/add_comment_to_post.html', stuff_for_frontend)
+
+
+# adds the remove comment with argment
+# if need to remove comment must use pk(primary key)
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk) # import from libarary
+    comment.delete()
+    return redirect('post_detail', pk=comment.post.pk) # depends on the page removes
+# stays on the page
