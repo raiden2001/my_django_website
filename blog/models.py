@@ -16,6 +16,9 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def approved_comments(self):
+        return self.comments.filter(approved=True)
+
     # creates a string representation
     def __str__(self):
         return self.title
@@ -32,6 +35,14 @@ class Comment(models.Model):
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)  # when u create comment , the comment create now
+    approved = models.BooleanField(default=False)
+    # default false they apporved set to false
+    # someone creates a coment is default then it will not be approved
+
+    def approve(self):
+        self.approved = True
+        self.save()
+
 
     def __str__(self):  # creates string for parenthesisi
         return self.text

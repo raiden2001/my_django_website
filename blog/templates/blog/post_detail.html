@@ -33,21 +33,33 @@
                 
         </div>
 
-        <hr>     <!----from views.py and urls.py  must give a n arg=pk--------->
+        <hr>     <!----from views.py and urls.py  must give a n arg=pk-add comment-------->
         <a href="{%url 'add_comment_to_post' pk=post.pk %}" class="btn btn-secondary">Add comment</a>
         {% for comment in post.comments.all %}
-            <div class="comment">
+
+            {% if user.is_authenticated or comment.approved %}
+             <div class="comment">
+
                 <div class="date">
                      {{ comment.created_date }}
                 </div>
-                <a href="{%url 'comment_remove' pk=comment.pk %}"><i class="fa fa-trash-alt"></i></a>
+                {% if not comment.approved and user.is_superuser %}
+                    <a href="{%url 'comment_approve' pk=comment.pk%}"><i class="fa fa-check-square"></i></a>
 
-                <strong>{{ comment.author }}</strong>
-                <p>{{ comment.text }}</p>
-            </div>
+                    <a href="{%url 'comment_remove' pk=comment.pk %}"><i class="fa fa-trash-alt"></i></a>
+
+                {% endif %}
+                 <!------------if nothing approved , then allow user to approve(onlysuper usercan approve) and remove it------------------->
+                 <!---------- if user is apporved then  all of the above is approved then show comments ----------->
+                      <strong>{{ comment.author }}</strong>
+                      <p>{{ comment.text }}</p>
+                      </div>
+                {% endif %}
 
             {% empty %}
-            <p>NO comments for now ......</p>
+                 <p>NO comments for now ......</p>
+
         {% endfor %}
+
 {% endblock %}
 

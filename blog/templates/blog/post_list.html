@@ -13,6 +13,9 @@
                <!---for the link is post_detail.html, arg= pk=post.pk CLICKABLE--->
                 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
                 <p>{{ post.text|truncatechars:10 | linebreaksbr }}</p>
-            </div>
+                <!---------------------post the numebr of comments------------------>
+                 <a href="{%url 'post_detail' pk=post.pk %}">Comments:{{ post.approved_comments.count}}</a>
+                 <!-------This  suppose count all of the counts -------------------------------->
+             </div>
         {% endfor %}
 {% endblock  %}

@@ -113,7 +113,15 @@ def add_comment_to_post(request, pk):
 # adds the remove comment with argment
 # if need to remove comment must use pk(primary key)
 def comment_remove(request, pk):
-    comment = get_object_or_404(Comment, pk=pk) # import from libarary
+    comment = get_object_or_404(Comment, pk=pk)  # import from libarary
     comment.delete()
-    return redirect('post_detail', pk=comment.post.pk) # depends on the page removes
+    return redirect('post_detail', pk=comment.post.pk)  # depends on the page removes
+
+
 # stays on the page
+
+def comment_approve(request, pk):  # grab and get sepcfifc to get one
+    # mydangosite.com/comment/2/approve --> 2nd comment gwr approve
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.post.pk) # as soons coments apporve brings abck to the post
