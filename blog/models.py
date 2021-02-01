@@ -15,7 +15,7 @@ class Post(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
-
+    # approved comments no migration is needed becase under opost
     def approved_comments(self):
         return self.comments.filter(approved=True)
 

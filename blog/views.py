@@ -92,6 +92,7 @@ def post_publish(request, pk):  # if you publish soemthing u need pk
 
 
 # use block post must have primary key get to specific blog post
+@login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -112,6 +113,7 @@ def add_comment_to_post(request, pk):
 
 # adds the remove comment with argment
 # if need to remove comment must use pk(primary key)
+@login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)  # import from libarary
     comment.delete()
@@ -119,7 +121,7 @@ def comment_remove(request, pk):
 
 
 # stays on the page
-
+@login_required
 def comment_approve(request, pk):  # grab and get sepcfifc to get one
     # mydangosite.com/comment/2/approve --> 2nd comment gwr approve
     comment = get_object_or_404(Comment, pk=pk)
