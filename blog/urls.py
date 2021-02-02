@@ -23,6 +23,10 @@ urlpatterns = [
     # mydangosite.com/post/2/edit --> online
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
 
+    # 127.0.0.1:8000/post/2/delete ----> local
+    # mydangosite.com/post/2/delete --> online
+    path('post/<int:pk>/delete/', views.post_delete,name='post_delete'),
+
     # 127.0.0.1:8000/drafts ----> local
     # mydangosite.com/drafts --> online
     path('drafts/', views.post_draft_list, name='post_draft_list'),
@@ -42,4 +46,7 @@ urlpatterns = [
     # 127.0.0.1:8000/comment/2/approve----> local
     # mydangosite.com/comment/2/approve --> online pk=2
     path('comment/<int:pk>/approve', views.comment_approve, name='comment_approve'),
+
+
 ]
+

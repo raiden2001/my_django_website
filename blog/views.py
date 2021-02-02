@@ -91,6 +91,14 @@ def post_publish(request, pk):  # if you publish soemthing u need pk
     return redirect('post_detail', pk=pk)
 
 
+# we need specific posts nbecause there are many so we must Primary key
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()  # must use '/' homepage to make delete
+    return redirect('/', pk=post.pk) # deletes post from primary key once remove post if u use pk=post.pk
+
+
 # use block post must have primary key get to specific blog post
 @login_required
 def add_comment_to_post(request, pk):
@@ -126,4 +134,4 @@ def comment_approve(request, pk):  # grab and get sepcfifc to get one
     # mydangosite.com/comment/2/approve --> 2nd comment gwr approve
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect('post_detail', pk=comment.post.pk) # as soons coments apporve brings abck to the post
+    return redirect('post_detail', pk=comment.post.pk)  # as soons coments apporve brings abck to the post

@@ -28,6 +28,10 @@
             <a href="{%url 'post_edit' pk=post.pk %}"><i class="fa fa-edit fa-2x" style="color: #339af0"></i></a>
             {% endif %}
 
+            <a href="{%url 'post_delete' pk=post.pk %}" class="btn btn-danger"
+            onclick=" return confirm('Are you sure you want to delete this post?')"><i class="fa fa-user-times"></i></a>
+
+
             <i class="fa fa-twitter" style="color:#000000"></i>
             <i class="fa fa-circle-o"></i>
 
