@@ -1,5 +1,8 @@
 
 {% extends 'blog/Base.html' %} <!----heritaning from base.html --->
+{% load markdownify %}
+
+
  <!----the fontfrom base.html will be shown here---------->
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
@@ -29,7 +32,7 @@
             <i class="fa fa-circle-o"></i>
 
             <h1>{{ post.title }}</h1>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <p>{{ post.text| markdown | safe }}</p>
                 
         </div>
 
@@ -52,7 +55,7 @@
                  <!------------if nothing approved , then allow user to approve(onlysuper usercan approve) and remove it------------------->
                  <!---------- if user is apporved then  all of the above is approved then show comments ----------->
                       <strong>{{ comment.author }}</strong>
-                      <p>{{ comment.text }}</p>
+                      <p>{{ comment.text | markdown | safe | linebreaksbr }}</p>
                       </div>
                 {% endif %}
 

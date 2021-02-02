@@ -1,4 +1,7 @@
  {% extends 'blog/Base.html'%}
+
+ {% load markdownify %}
+
  {% block title%} My American President Vote pages Blog {% endblock %}
 
  {% block content%}
@@ -10,9 +13,9 @@
                         <p>Published date: {{post.published_date}}</p>
                  </div>
 
-               <!---for the link is post_detail.html, arg= pk=post.pk CLICKABLE--->
+               <!---for the link is post_detail.html, arg= pk=post.pk CLICKABLE---truncatechars:10-------->
                 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-                <p>{{ post.text|truncatechars:10 | linebreaksbr }}</p>
+                <p>{{ post.text | markdown | safe | linebreaksbr }}</p>
                 <!---------------------post the numebr of comments------------------>
                  <a href="{%url 'post_detail' pk=post.pk %}">Comments:{{ post.approved_comments.count}}</a>
                  <!-------This  suppose count all of the counts -------------------------------->
