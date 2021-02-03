@@ -1,7 +1,9 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, UserForm
 from .models import Post, Comment
 
 
@@ -96,7 +98,7 @@ def post_publish(request, pk):  # if you publish soemthing u need pk
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()  # must use '/' homepage to make delete
-    return redirect('/', pk=post.pk) # deletes post from primary key once remove post if u use pk=post.pk
+    return redirect('/', pk=post.pk)  # deletes post from primary key once remove post if u use pk=post.pk
 
 
 # use block post must have primary key get to specific blog post
@@ -135,3 +137,15 @@ def comment_approve(request, pk):  # grab and get sepcfifc to get one
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('post_detail', pk=comment.post.pk)  # as soons coments apporve brings abck to the post
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():  # use the clean data from the form
+            new_user = User.objects.create_user(**form.cleaned_data)
+            login(request, new_user)
+            return redirect('/') # returns to home page
+    else:  # from the forms inherts
+        form = UserForm()
+    return  render(request, 'registration/signup.html', {'form': form})

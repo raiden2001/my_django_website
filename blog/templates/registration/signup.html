@@ -1,0 +1,18 @@
+{% extends 'blog/Base.html' %}
+
+{%block title %}SignUp{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+    <div class="panel panel-default">
+        <h3 style="text-align: center; font-family: sans-serif"> <i class="fa fa-flag-usa">Welcome to the President USA Election blog</i></h3>
+        <div class="panel-body">
+            {% crispy form %}
+
+        </div>
+    </div>
+
+
+{% endblock %}

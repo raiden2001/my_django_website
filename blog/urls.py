@@ -47,6 +47,9 @@ urlpatterns = [
     # mydangosite.com/comment/2/approve --> online pk=2
     path('comment/<int:pk>/approve', views.comment_approve, name='comment_approve'),
 
+    # 127.0.0.1:8000/signup----> local
+    # mydangosite.com/signup --> online
+    path('signup/', views.signup, name='signup')
 
 ]
 
